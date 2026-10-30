@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>mi escena · Interfaces multimodales</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600&family=Pacifico&family=Caveat:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f9a9c9;--bg2:#fcc6dc;--card:#fffafc;--ink:#2b1620;--pink:#f0348a;--pink2:#d81b7a;--soft:#fde1ee;--line:#f58fb8;--shadow:rgba(216,27,122,.25);color-scheme:light;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:'Fredoka',system-ui,sans-serif;color:var(--ink);background:radial-gradient(circle at 20% 10%,var(--bg2),transparent 45%),var(--bg);min-height:100vh}
+.wrap{max-width:1080px;margin:0 auto;padding:16px}
+header{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;margin-bottom:16px}
+.logo{font-family:'Pacifico',cursive;font-size:clamp(28px,5vw,42px);color:var(--pink2);margin:0;line-height:1}
+.logo small{font-size:.35em;vertical-align:top}
+nav{display:flex;flex-wrap:wrap;gap:8px}
+nav a{background:#ffd9ea;color:var(--pink2);text-decoration:none;font-weight:500;font-size:14px;padding:8px 14px;border-radius:10px;border:2px solid var(--line);box-shadow:0 3px 0 var(--line)}
+nav a.on{background:var(--pink);color:#fff;border-color:#fff}
+.grid{display:grid;grid-template-columns:200px 1fr 330px;gap:16px;align-items:start}
+.panel{background:var(--card);border-radius:14px;padding:14px;box-shadow:0 6px 18px var(--shadow);border:2px solid #fff6}
+.friends h3,.blog h3{margin:0 0 8px;font-family:'Pacifico',cursive;color:var(--pink2);font-weight:400}
+.friends{background:linear-gradient(var(--soft),var(--bg2))}
+.strip{display:grid;grid-template-columns:1fr 1fr;gap:6px;max-height:430px;overflow:auto;padding:6px;background:var(--card);border-radius:10px}
+.fr{border:0;background:var(--soft);border-radius:8px;padding:6px 2px;cursor:pointer;font:inherit;color:var(--ink);text-align:center;border:2px solid transparent;display:flex;flex-direction:column;align-items:center;gap:2px}
+.fr span{font-size:30px;line-height:1.1}
+.fr b{font-size:10.5px;font-weight:500;line-height:1.1}
+.fr.on{border-color:var(--pink);background:#fff}
+.fr:hover{border-color:var(--pink2)}
+.back{display:block;margin-top:10px;font-family:'Caveat',cursive;font-size:20px;color:var(--pink2);text-decoration:none}
+.center{display:flex;flex-direction:column;gap:16px}
+.about{display:grid;grid-template-columns:1fr 1fr;gap:0;border-radius:6px;overflow:hidden;background:var(--pink);color:#fff;position:relative;min-height:230px}
+.about .face{display:grid;place-items:center;font-size:110px;background:linear-gradient(135deg,#ff7fb5,#e0187a)}
+.about .txt{padding:18px;display:flex;flex-direction:column;justify-content:center}
+.about h2{font-size:38px;margin:0 0 8px;line-height:1.05;font-weight:500}
+.about p{margin:0;font-size:15px;line-height:1.4}
+.about .who{margin-top:10px;font-family:'Caveat',cursive;font-size:22px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.heart{font-size:56px;text-align:center;filter:drop-shadow(0 4px 6px var(--shadow))}
+.walls h4{font-family:'Pacifico',cursive;color:var(--pink2);margin:0 0 8px;font-weight:400}
+.walls .tiles{display:flex;gap:8px;font-size:34px}
+.walls .tiles span{background:var(--soft);border-radius:8px;padding:6px 10px}
+.btn{display:inline-block;margin-top:10px;background:var(--pink);color:#fff;border:0;border-radius:10px;padding:8px 14px;font:inherit;font-weight:500;cursor:pointer;text-decoration:none}
+.blog .post{background:var(--soft);border-radius:8px;padding:10px 12px;margin-bottom:8px;font-size:14px;line-height:1.4}
+.blog .post time{color:var(--pink2);font-weight:600;font-size:13px}
+.blog .post h5{margin:2px 0 4px;color:var(--pink2);font-size:15px}
+.phone{background:linear-gradient(160deg,#ff8fbf,#e0187a);border-radius:34px 34px 44px 44px;padding:18px 16px 24px;box-shadow:0 10px 24px var(--shadow);position:relative;border:3px solid #fff7}
+.phone::before{content:"";position:absolute;right:26px;top:-28px;width:22px;height:42px;background:#2b0f1f;border-radius:10px 10px 0 0;transform:rotate(14deg);z-index:-1}
+.phone h4{font-family:'Pacifico',cursive;color:#fff;margin:0 0 8px;text-align:center;font-weight:400}
+.screen{background:var(--card);border-radius:12px;padding:10px;border:3px solid #fff8}
+.screen .top{display:flex;justify-content:space-between;font-size:11px;font-weight:600;color:var(--pink2);margin-bottom:6px}
+.slide{display:block;width:100%;border:0;background:linear-gradient(var(--soft),var(--card));border-radius:10px;padding:26px 8px 18px;cursor:pointer;font:inherit;color:var(--ink);text-align:center;text-decoration:none}
+.slide .e{font-size:92px;line-height:1.1;transition:transform .3s}
+.slide:hover .e{transform:scale(1.12) rotate(-6deg)}
+.slide .t{font-weight:600;font-size:17px;margin-top:8px;color:var(--pink2)}
+.slide .go{font-size:12px;opacity:.8;margin-top:2px}
+.dots{display:flex;flex-wrap:wrap;justify-content:center;gap:5px;margin-top:8px}
+.dots i{width:8px;height:8px;border-radius:50%;background:var(--line);opacity:.5}
+.dots i.on{background:var(--pink2);opacity:1;transform:scale(1.3)}
+.keys{display:flex;justify-content:center;gap:10px;margin-top:14px}
+.keys button{width:44px;height:44px;border-radius:50%;border:3px solid #fff8;background:#ffd0e5;color:var(--pink2);font-size:18px;cursor:pointer}
+footer{text-align:center;margin-top:22px;font-size:14px;padding:10px 0 20px}
+.hearts{font-size:18px;letter-spacing:6px;opacity:.7}
+@media(max-width:900px){.grid{grid-template-columns:1fr}.strip{max-height:none;grid-template-columns:repeat(4,1fr)}.phone{max-width:340px;margin:12px auto 0}.phone::before{display:none}}
+@media(max-width:520px){.about,.row{grid-template-columns:1fr}.about .face{font-size:80px;padding:18px}.strip{grid-template-columns:repeat(3,1fr)}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1 class="logo">mi<span style="color:var(--pink)">escena</span>.com<small>™</small></h1>
+  <nav>
+    <a href="#apps">♥ mis apps</a><a href="#amigas" class="on">♥ mis proyectos</a><a href="#about">♥ mi ’zine</a><a href="#blog">♥ mi blog</a><a href="#telefono">♥ mi teléfono</a>
+  </nav>
+</header>
+
+<div class="grid">
+  <aside class="panel friends" id="amigas">
+    <h3>Mis apps</h3>
+    <div class="strip" id="strip"></div>
+    <a class="back" href="#about">← volver al inicio</a>
+  </aside>
+
+  <main class="center">
+    <section class="panel about" id="about" style="padding:0">
+      <div class="face">👩‍💻</div>
+      <div class="txt">
+        <h2>All About Me</h2>
+        <p>Trabajo de la materia Creación de interfaces multimodales. Realizado por María José Romo García</p>
+        <div class="who">Curso: Creación de interfaces multimodales · 2026</div>
+      </div>
+    </section>
+
+    <div class="row" id="apps">
+      <section class="panel" style="text-align:center">
+        <div class="heart">💖</div>
+        <p style="margin:6px 0 0;font-weight:500">16 apps hechas con voz, imagen, texto y sensores ✨</p>
+      </section>
+      <section class="panel walls">
+        <h4>Fondos de pantalla</h4>
+        <div class="tiles"><span>🎙️</span><span>👁️</span><span>📡</span></div>
+        <a class="btn" href="#telefono">¡consigue uno!</a>
+      </section>
+    </div>
+
+    <section class="panel blog" id="blog">
+      <h3>Mi blog ♡</h3>
+      <div class="post"><time>14/09/2026</time><h5>¡Mi app escucha mi voz!</h5>Hoy logré que una interfaz de Streamlit obedeciera comandos hablados. Me emocioné mucho cuando respondió a la primera. 🎙️</div>
+      <div class="post"><time>02/10/2026</time><h5>Cuando los sensores hablan por MQTT</h5>Conecté un sensor, mandé datos por MQTT y los vi en tiempo real. Después hice el camino inverso para controlar cosas desde la web. 📡</div>
+      <div class="post"><time>21/10/2026</time><h5>YOLO me ve (y me reconoce)</h5>La detección de objetos encontró hasta mi taza de café. Aprendí que una interfaz también puede mirar. 🎯</div>
+    </section>
+  </main>
+
+  <aside class="phone" id="telefono">
+    <h4>Mi teléfono</h4>
+    <div class="screen">
+      <div class="top"><span>VER</span><span>¡Apps geniales! 📶</span></div>
+      <a class="slide" id="slide" href="#" target="_blank" rel="noopener">
+        <div class="e" id="se"></div>
+        <div class="t" id="st"></div>
+        <div class="go">toca para abrir la app ↗</div>
+      </a>
+      <div class="dots" id="dots"></div>
+    </div>
+    <div class="keys"><button id="prev" aria-label="Anterior">◀</button><button id="next" aria-label="Siguiente">▶</button></div>
+  </aside>
+</div>
+
+<footer>
+  <div class="hearts">♥ ♡ ♥ ♡ ♥ ♡ ♥ ♡ ♥</div>
+  María José Romo García · Creación de interfaces multimodales · 2026
+</footer>
+</div>
+
+<script>
+const apps=[
+["🎙️","Control por voz","https://ctrlvoice-gkxrkccm3ezek4rrazjy5k.streamlit.app/"],
+["📡","Lector de sensor","https://recepmqtt-a7bfqotczyjziagqm763jr.streamlit.app/"],
+["✍️","Dígitos escritos a mano","https://mnistpred-89n72krerehljxvxv6ikay.streamlit.app/"],
+["📄","Chat PDF","https://chatpdf-39smuzwubj9n4spqnwrtwd.streamlit.app/"],
+["📑","PDF","https://chatpdf-39smuzwubj9n4spqnwrtwd.streamlit.app/"],
+["🎨","Tablero de historias","https://drawrecog-t8tzauzzmmzarxfhxwvcle.streamlit.app/"],
+["🎛️","MQTT control","https://sendcmqtt-7tg9joxh4y2ayo6ifg8f7q.streamlit.app/"],
+["👋","Intro","https://wysp77wekoormvstslckdi.streamlit.app/"],
+["🔊","Text to speech","https://visionapp-scerzjqpgqy9jqmdoaqish.streamlit.app/"],
+["🎧","Audio a texto","https://traductor-jtm6ax5wa6otbnyhqkljaz.streamlit.app/"],
+["🔍","OCR 1","https://tcwebfavvurkuo7adcwfiu.streamlit.app/"],
+["🗣️","OCR + audio","https://ocr-audio-jcm8y24zdliyduszw8hkxq.streamlit.app/"],
+["💬","Análisis de sentimiento","https://sentimenta-moqq93tp9xrkq4i27ark8d.streamlit.app/"],
+["📊","TF-IDF","https://kzxyamkbrenxjjx93sxxjb.streamlit.app/"],
+["☁️","Nube de palabras","https://wordcloud-nk51k0gkd.streamlit.app/"],
+["🎯","YOLO","https://yolov5-975csm4s69e.streamlit.app/"]
+];
+let i=0,timer;
+const $=id=>document.getElementById(id);
+const strip=$('strip'),dots=$('dots');
+apps.forEach((a,n)=>{
+  const b=document.createElement('button');b.className='fr';b.innerHTML=`<span>${a[0]}</span><b>${a[1]}</b>`;
+  b.onclick=()=>{show(n);restart()};strip.appendChild(b);
+  const d=document.createElement('i');dots.appendChild(d);
+});
+function show(n){
+  i=(n+apps.length)%apps.length;const a=apps[i];
+  $('se').textContent=a[0];$('st').textContent=a[1];$('slide').href=a[2];
+  [...strip.children].forEach((c,k)=>c.classList.toggle('on',k===i));
+  [...dots.children].forEach((c,k)=>c.classList.toggle('on',k===i));
+}
+function restart(){clearInterval(timer);timer=setInterval(()=>show(i+1),3000)}
+$('prev').onclick=()=>{show(i-1);restart()};
+$('next').onclick=()=>{show(i+1);restart()};
+show(0);restart();
+</script>
+</body>
+</html>
